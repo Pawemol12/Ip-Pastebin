@@ -1,0 +1,8 @@
+App\Entity\Paste:
+  constraints:
+    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: code
+  properties:
+    title:
+      - NotBlank: ~
+    text:
+      - NotBlank: ~

@@ -1,0 +1,42 @@
+mainPage:
+  title: Ip Pastebin
+pastebin:
+  title: Pastebin
+  pastePaste: Wklej paste
+  pasteList: Lista paste'ów
+  addNewPasteTitle: Dodawanie nowego paste'a
+  paste:
+    title: Tytuł paste'a
+    text: Tekst
+    code: Kod
+    date: Data
+  addPasteSuccess: Pomyślnie dodano nowego paste'a.
+  pasteLink: Link do paste'a
+  pasteViewTitle: Przeglądanie paste'a
+  pasteNotExist: Brak paste'a o takim kodzie!
+
+alertTitles:
+  info: Informacja.
+  success: Sukces!
+  warning: Uwaga!
+  error: Błąd.
+
+
+formValidationErrors: Podczas walidacji formularza wystąpiły błędy
+
+save: Zapisz
+
+ipInfo:
+  countryCode: Kod kraju
+  asName: Nazwa As
+  asNumber: Numer As
+  firstIp: Pierwsze Ip
+  ip: Ip
+  lastIp: Ostatnie ip
+
+apiConnectionError: Błąd połączenia z API
+noIpInfo: Nie udało się pobrać informacji o tym adresie IP!
+noResult: Brak wyników
+lp: Lp.
+actions: Akcje
+view: Podgląd

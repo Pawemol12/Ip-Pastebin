@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% set title='pastebin.addNewPasteTitle'|trans %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h2>{{ title }}</h2>
+            <hr/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {% include 'paste/pasteForm.html.twig' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {% include 'snippets/alertContainer.html.twig' %}
+
+            {% if newPasteLink is defined and newPasteLink %}
+                <a href="{{ newPasteLink }}">{% trans %}pastebin.pasteLink{% endtrans %}</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

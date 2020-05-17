@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% set title='pastebin.pasteList'|trans %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h2>{{ title }}</h2>
+            <hr/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {% if pasteList is not empty %}
+                {% include 'paste/pasteTable.html.twig' %}
+            {% else %}
+                <div class="alert alert-warning">
+                    <h2>{% trans %}noResult{% endtrans %}</h2>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {% include 'snippets/alertContainer.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

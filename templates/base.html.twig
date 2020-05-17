@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Paweł Lodzik">
+    <meta name="description" content="Ip Pastebin">
+    <title>{% block title %}
+        {% if title is defined and title %}
+            {{ title }}
+        {% endif %}
+        {% endblock %}</title>
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+{% set containerClass = 'container' %}
+{% if containerClassFluid is defined and containerClassFluid %}
+    {% set containerClass = 'container-fluid' %}
+{% endif %}
+
+<div class="{{ containerClass }}">
+    {% include 'base/nav.html.twig' %}
+    <div id="mainContent">
+    {% block body %}{% endblock %}
+    </div>
+    {% include 'base/footer.html.twig' %}
+</div>
+
+
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/script.js') }}"></script>
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>

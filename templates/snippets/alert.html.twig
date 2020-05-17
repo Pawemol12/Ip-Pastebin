@@ -1,0 +1,7 @@
+<div class="alert alert-dismissable {{ constant('App\\Enum\\AlertsEnum::ALERT_CLASSES')[alertType] }}">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{ (constant('App\\Enum\\AlertsEnum::ALERT_TITLES')[alertType])|trans }}</strong>
+    {% block alert_text %}
+        {{ alertMessage }}
+    {% endblock %}
+</div>

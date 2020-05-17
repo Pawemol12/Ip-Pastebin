@@ -1,0 +1,19 @@
+<div id="alertContainer">
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            {% include 'snippets/alert.html.twig' with {
+                'alertType' : label,
+                'alertMessage' : message
+            } %}
+        {% endfor %}
+    {% endfor %}
+
+    {% if alerts is defined and alerts is not empty %}
+        {% for alert in alerts %}
+            {% include 'snippets/alert.html.twig' with {
+                'alertType' : alert.type,
+                'alertMessage' : alert.message
+            } %}
+        {% endfor %}
+    {% endif %}
+</div>
