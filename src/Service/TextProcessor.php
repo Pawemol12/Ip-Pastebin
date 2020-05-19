@@ -41,17 +41,7 @@ class TextProcessor
 
         foreach ($ipAddresses as $ipAddress)
         {
-            $ipInfo = $this->ipToAsnApi->getInfoAboutIp($ipAddress);
-
-            if (empty($ipInfo)) {
-                $tooltipTitle = $this->translator->trans('apiConnectionError');
-            } else if (!$ipInfo['announced']) {
-                $tooltipTitle = $this->translator->trans('noIpInfo');
-            } else {
-                $tooltipTitle = $this->twig->render('paste/ipInfo.html.twig', [
-                    'ipInfo' => $ipInfo
-                ]);
-            }
+            $tooltipTitle = $this->getIpInfo($ipAddress);
 
             $ipAddressFormat = '<span title="'.$tooltipTitle.'" rel="tooltip" class="ipV4Address" data-html="true">'.$ipAddress.'</span>';
 
@@ -67,10 +57,30 @@ class TextProcessor
 
         foreach ($ipAddresses as $ipAddress)
         {
-            $ipAddressFormat = '<span class="ipV6Address">'.$ipAddress.'</span>';
+            $tooltipTitle = $this->getIpInfo($ipAddress);
+
+
+            $ipAddressFormat = '<span class="ipV6Address" title="'.$tooltipTitle.'" rel="tooltip" class="ipV6Address" data-html="true">'.$ipAddress.'</span>';
             $text = str_replace($ipAddress, $ipAddressFormat,  $text);
         }
 
         return $text;
+    }
+
+    private function getIpInfo($ipAddress)
+    {
+        $ipInfo = $this->ipToAsnApi->getInfoAboutIp($ipAddress);
+
+        if (empty($ipInfo)) {
+            $tooltipTitle = $this->translator->trans('apiConnectionError');
+        } else if (!$ipInfo['announced']) {
+            $tooltipTitle = $this->translator->trans('noIpInfo');
+        } else {
+            $tooltipTitle = $this->twig->render('paste/ipInfo.html.twig', [
+                'ipInfo' => $ipInfo
+            ]);
+        }
+
+        return $tooltipTitle;
     }
 }

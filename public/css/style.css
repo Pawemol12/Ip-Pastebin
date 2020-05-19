@@ -22,6 +22,7 @@
     white-space: pre-wrap;
     border: 5px dashed #9AA3A4;
     padding: 10px;
+    font-family: Consolas;
 }
 
 .ipV4Address {
