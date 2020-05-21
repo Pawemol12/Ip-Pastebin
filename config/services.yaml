@@ -1,9 +1,14 @@
 # This file is the entry point to configure your own services.
 # Files in the packages/ subdirectory configure your dependencies.
+imports:
+    - { resource: knp_paginator.yaml }
+
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    pastes_per_page: 1
+    users_per_page: 1
 
 services:
     # default configuration for services in *this* file

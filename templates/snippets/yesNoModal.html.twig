@@ -1,0 +1,11 @@
+{% extends 'snippets/modalForm.html.twig' %}
+{% set modalFooterEnabled = true %}
+
+{% block form %}
+    {{ text }}
+{% endblock %}
+
+{% block modalFooter %}
+    <button id="confirmBtn" data-action="{{ actionUrl }}" type="button" class="btn btn-success" data-dismiss="modal">{% trans %}yes{% endtrans %}</button>
+    <button id="cancelBtn" type="button" class="btn btn-danger">{% trans %}no{% endtrans %}</button>
+{% endblock %}

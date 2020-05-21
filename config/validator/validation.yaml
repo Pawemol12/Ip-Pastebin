@@ -6,3 +6,5 @@ App\Entity\Paste:
       - NotBlank: ~
     text:
       - NotBlank: ~
+    expireDate:
+      - GreaterThan: +1 hours

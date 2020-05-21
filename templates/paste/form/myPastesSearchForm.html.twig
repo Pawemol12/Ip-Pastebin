@@ -1,0 +1,47 @@
+<div class="form-wrapper">
+    <div class="col">
+        {{ form_start(searchForm) }}
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                {{ form_row(searchForm.title) }}
+            </div>
+            <div class="col-md-6 col-lg-6">
+                {{ form_row(searchForm.code) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                <h4 class="text-center">{% trans %}pastebin.paste.createDate{% endtrans %}</h4>
+                <hr/>
+                <div class="row">
+                    <div class="col">
+                        {{ form_row(searchForm.createDateFrom) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(searchForm.createDateTo) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                <h4 class="text-center">{% trans %}pastebin.paste.expireDate{% endtrans %}</h4>
+                <hr/>
+                <div class="row">
+                    <div class="col">
+                        {{ form_row(searchForm.expireDateFrom) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(searchForm.expireDateTo) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                {{ form_row(searchForm.search, {'attr': {'class': 'btn-block btn btn-primary searchFormBtn'}}) }}
+            </div>
+        </div>
+
+        {{ form_end(searchForm) }}
+    </div>
+</div>

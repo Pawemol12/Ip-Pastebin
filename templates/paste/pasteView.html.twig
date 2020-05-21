@@ -3,7 +3,7 @@
 {% set title='pastebin.pasteViewTitle'|trans %}
 
 {% block body %}
-    <div class="row" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
         <div class="col">
             <h2>{{ title }}</h2>
             <hr/>
@@ -20,11 +20,19 @@
             {{ paste.code }}
             </span><br/>
 
-            <span id="pasteCode"><strong>{% trans %}pastebin.paste.date{% endtrans %}</strong>:
-            {{ paste.date|date('Y-m-d H:i:s')  }}
+            <span id="pasteCreateDate"><strong>{% trans %}pastebin.paste.createDate{% endtrans %}</strong>:
+            {{ paste.createDate|date('Y-m-d H:i:s')  }}
             </span><br/>
 
-            <span id="pasteCode"><strong>{% trans %}pastebin.paste.text{% endtrans %}</strong>:</span><br/>
+            <span id="pasteExpireDate"><strong>{% trans %}pastebin.paste.expireDate{% endtrans %}</strong>:
+            {{ paste.expireDate ? paste.expireDate|date('Y-m-d H:i:s') : 'pastebin.paste.notExpire'|trans  }}
+            </span><br/>
+
+            <span id="pasteExpireDate"><strong>{% trans %}pastebin.paste.createdBy{% endtrans %}</strong>:
+            {{ paste.user ? paste.user.username : 'anonim'|trans  }}
+            </span><br/>
+
+            <span id="pasteTextLabel"><strong>{% trans %}pastebin.paste.text{% endtrans %}</strong>:</span><br/>
 
             <div id="pasteText">{{  pasteText|raw }}</div>
 

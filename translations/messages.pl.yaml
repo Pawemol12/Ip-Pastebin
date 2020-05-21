@@ -1,19 +1,48 @@
+username: Nazwa użytkownika
+password: Hasło
+or: Or
+usernamePlaceholder: Wprowadź nazwę użytkownika
+passwordPlaceholder: Wprowadź hasło
+show: Pokaż
+yes: Tak
+no: Nie
+logout: Wyloguj
+login: Zaloguj się
+date: Data
+dateFrom: Data od
+dateTo: Data do
+
+loginPage:
+  title: Panel Logowania
+
 mainPage:
   title: Ip Pastebin
+anonim: Anonim
 pastebin:
   title: Pastebin
   pastePaste: Wklej paste
-  pasteList: Lista paste'ów
+  myPasteList: Lista moich paste'ów
   addNewPasteTitle: Dodawanie nowego paste'a
+  editPasteTitle: Edycja paste'a - {{ code }}
   paste:
+    createdBy: Utworzył
     title: Tytuł paste'a
     text: Tekst
+    expireDate: Data wygaśnięcia
     code: Kod
-    date: Data
+    createDate: Data dodania
+    notExpire: Nie wygasa
+    deleteTitle: Usuwanie paste'a - {{ code }}
+    deleteQuestion: Czy na pewno chcesz usunąć tego paste'a?
+
   addPasteSuccess: Pomyślnie dodano nowego paste'a.
+  editPasteSuccess: Pomyślnie edytowano paste'a.
+  deletePasteSuccess: Pomyślnie usunięto paste'a.
   pasteLink: Link do paste'a
   pasteViewTitle: Przeglądanie paste'a
   pasteNotExist: Brak paste'a o takim kodzie!
+  pasteNotUser: Nie jesteś właścicielem tego paste'a!
+  pasteExpired: Niestety ten paste już wygasł.
 
 alertTitles:
   info: Informacja.
@@ -40,3 +69,4 @@ noResult: Brak wyników
 lp: Lp.
 actions: Akcje
 view: Podgląd
+search: Wyszukaj

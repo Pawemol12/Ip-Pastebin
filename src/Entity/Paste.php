@@ -35,7 +35,19 @@ class Paste
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date;
+    private $createDate;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $expireDate;
+
+    /**
+     * Wiele wklejek ma 1 użytkownika.
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="pastes")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -72,13 +84,39 @@ class Paste
         $this->code = $code;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getCreateDate(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->createDate;
     }
 
-    public function setDate(\DateTimeInterface $date)
+    public function setCreateDate(\DateTimeInterface $createDate)
     {
-        $this->date = $date;
+        $this->createDate = $createDate;
+    }
+
+    public function getExpireDate(): ?\DateTimeInterface
+    {
+        return $this->expireDate;
+    }
+
+    public function setExpireDate(\DateTimeInterface $expireDate)
+    {
+        $this->expireDate = $expireDate;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User|null $user
+     */
+    public function setUser(?User $user): void
+    {
+        $this->user = $user;
     }
 }

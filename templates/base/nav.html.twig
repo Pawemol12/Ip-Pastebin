@@ -7,14 +7,27 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {% if page is defined and page == 'pastebin' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle {% if page is defined and page == constant('App\\Enum\\PagesEnum::PASTEBIN_PAGE')  %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {% trans %}pastebin.title{% endtrans %}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ path('pasteNew') }}">{% trans %}pastebin.pastePaste{% endtrans %}</a>
-                    <a class="dropdown-item" href="{{ path('pasteList') }}">{% trans %}pastebin.pasteList{% endtrans %}</a>
+                    {% if app.user %}
+                    <a class="dropdown-item" href="{{ path('myPasteList') }}">{% trans %}pastebin.myPasteList{% endtrans %}</a>
+                    {% endif %}
                 </div>
             </li>
         </ul>
+
+        {% if app.user %}
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#">{{ app.user.username }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('logout') }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true">{% trans %}logout{% endtrans %}</span></a></li>
+            </ul>
+        {% else %}
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ path('login') }}"><span class="glyphicon glyphicon-log-in" aria-hidden="true">{% trans %}login{% endtrans %}</span></a></li>
+            </ul>
+        {% endif %}
     </div>
 </nav>

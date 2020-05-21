@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% set title='loginPage.title'|trans %}
+{% block stylesheets %}
+    <link href="{{ asset('css/login_form.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <div id="first">
+                <div class="myform form ">
+                    <div class="logo mb-3">
+                        <div class="col-md-12 text-center">
+                            <h1>{% trans %}loginPage.title{% endtrans %}</h1>
+                        </div>
+                    </div>
+                    <form action="" method="post" name="login">
+                        <div class="form-group">
+                            <label for="username">{% trans %}username{% endtrans %}</label>
+                            <input type="text" name="_username" value="{{ last_username }}" class="form-control" id="username" placeholder="{% trans %}usernamePlaceholder{% endtrans %}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">{% trans %}password{% endtrans %}</label>
+                            <input type="password" name="_password" id="password"  class="form-control" placeholder="{% trans %}passwordPlaceholder{% endtrans %}">
+                        </div>
+                        <div class="col-md-12 text-center ">
+                            {% if error %}
+                                <span class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                            {% endif %}
+                            <button type="submit" class=" btn btn-block mybtn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% import "snippets/paginationRenderSort.html.twig" as paginationRenderSort %}
+
+<table class="table table-striped table-bordered nowrap">
+    <thead class="thead-light">
+        <th scope="col">{% trans %}lp{% endtrans %}</th>
+        <th scope="col">{{ paginationRenderSort.renderSort(pagination, 'pastebin.paste.title'|trans, 'p.title') }}</th>
+        <th scope="col">{{ paginationRenderSort.renderSort(pagination, 'pastebin.paste.code'|trans, 'p.code') }}</th>
+        <th scope="col">{{ paginationRenderSort.renderSort(pagination, 'pastebin.paste.createDate'|trans, 'p.createDate') }}</th>
+        <th scope="col">{{ paginationRenderSort.renderSort(pagination, 'pastebin.paste.expireDate'|trans, 'p.expireDate') }}</th>
+        <th scope="col">{% trans %}actions{% endtrans %}</th>
+    </thead>
+
+    <tbody>
+    {% for paste in pagination %}
+        <tr>
+            <td scope="row">{{ loop.index }}</td>
+            <td>{{ paste.title }}</td>
+            <td>{{ paste.code }}</td>
+            <td>{{ paste.createDate|date('Y-m-d H:i:s') }}</td>
+            <td>{{ paste.expireDate ? paste.expireDate|date('Y-m-d H:i:s') : 'pastebin.paste.notExpire'|trans }}</td>
+            <td>
+                <a href="{{ path('pasteView', {'pasteCode': paste.code}) }}" class="btn btn-primary fas fa-book btnAction"></a>
+                <a href="{{ path('pasteEdit', {'pasteCode': paste.code}) }}" class="btn btn-primary fas fa-edit btnAction btnPasteEdit"></a>
+
+                <button class="btn btn-danger fas fa-trash btnAction btnMyPasteDelete" data-action="{{ path('pasteDeleteMine', {'pasteCode' : paste.code }) }}"></button>
+            </td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>

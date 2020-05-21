@@ -1,0 +1,12 @@
+{% macro renderSort(pagination, header, propertyName) %}
+<div class="custom-sort">
+    {{ knp_pagination_sortable(pagination, header, propertyName) }}
+    {% if not pagination.isSorted(propertyName) %}
+        <i class="fas fa-sort"></i>
+    {% elseif pagination.isSorted(propertyName) and pagination.getDirection() == 'asc' %}
+        <i class="fas fa-sort-up"></i>
+    {% elseif pagination.isSorted(propertyName) and pagination.getDirection() == 'desc' %}
+        <i class="fas fa-sort-down"></i>
+    {% endif %}
+</div>
+{% endmacro %}
