@@ -1,0 +1,6 @@
+{% extends 'snippets/modalForm.html.twig' %}
+{#{% set additionalDialogClass = 'modal-xl' %}#}
+{% set ModalId = 'UserFormModal' %}
+{% block form %}
+    {{ include('user/form/userForm.html.twig', { 'form': form }) }}
+{% endblock %}

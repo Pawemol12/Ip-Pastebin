@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% set title='usersPage.title'|trans %}
+{% set page=constant('App\\Enum\\PagesEnum::ADMIN_PAGE') %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h2>{{ title }}</h2>
+            <hr/>
+            <div id="UsersSearchFormWrapper">
+                {% include 'user/form/usersSearchForm.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div id="adminButtons">
+                <button id="addUserBtn" type="button" class="btn btn-success" data-action="{{ path('admin_users_add') }}">{% trans %}usersPage.addUser{% endtrans %}</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {% include 'snippets/alertContainer.html.twig' %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div id="UsersTableWrapper">
+                {% include 'user/table/usersTableWrapper.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+    <div id="ModalContainer"></div>
+{% endblock %}

@@ -1,0 +1,45 @@
+<div class="form-wrapper">
+    <div class="col">
+        {{ form_start(searchForm) }}
+        <div class="row">
+            <div class="col-md-4 col-lg-4">
+                {{ form_row(searchForm.username) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                <h4 class="text-center">{% trans %}user.createDate{% endtrans %}</h4>
+                <hr/>
+                <div class="row">
+                    <div class="col">
+                        {{ form_row(searchForm.createDateFrom) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(searchForm.createDateTo) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-lg-6">
+                <h4 class="text-center">{% trans %}user.lastLoginDate{% endtrans %}</h4>
+                <hr/>
+                <div class="row">
+                    <div class="col">
+                        {{ form_row(searchForm.lastLoginDateFrom) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(searchForm.lastLoginDateTo) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                {{ form_row(searchForm.search, {'attr': {'class': 'btn-block btn btn-primary searchFormBtn'}}) }}
+            </div>
+        </div>
+
+        {{ form_end(searchForm) }}
+    </div>
+</div>

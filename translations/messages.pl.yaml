@@ -11,6 +11,10 @@ login: Zaloguj się
 date: Data
 dateFrom: Data od
 dateTo: Data do
+never: Nigdy
+
+adminPage:
+  title: Admin
 
 loginPage:
   title: Panel Logowania
@@ -19,9 +23,28 @@ mainPage:
   title: Ip Pastebin
 anonim: Anonim
 
+usersPage:
+  title: Użytkownicy
+  addUser: Dodaj użytkownika
+  userNotExist: Taki użytkownik nie istnieje!
+  userDeleteSuccess: Pomyślnie usunięto użytkownika!
+  userDeleteTitle: Usuwanie użytkownika {{ username }}
+  userDeleteQuestion: Czy na pewno chcesz usunąć użytkownika?
+  userAddTitle: Dodawanie nowego użytkownika
+  userAddSuccess: Pomyślnie dodano nowego użytkownika
+  userEditTitle: Edycja użytkownika {{ username }}
+  userEditSuccess: Pomyślnie edytowano użytkownika.
+
+userRoles:
+  role_user: Użytkownik
+  role_admin: Admin
+
 user:
   username: Nazwa użytkownika
   password: Hasło
+  createDate: Data utworzenia konta
+  lastLoginDate: Data ostatniego logowania
+  roles: Role
 
 registration:
   title: Rejestracja

@@ -13,7 +13,7 @@
     <tbody>
     {% for paste in pagination %}
         <tr>
-            <td scope="row">{{ loop.index }}</td>
+            <td scope="row">{{ ((pagination.getCurrentPageNumber - 1) * pagination.getItemNumberPerPage) + loop.index }}</td>
             <td>{{ paste.title }}</td>
             <td>{{ paste.code }}</td>
             <td>{{ paste.createDate|date('Y-m-d H:i:s') }}</td>

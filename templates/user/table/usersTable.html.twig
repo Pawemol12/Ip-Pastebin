@@ -1,0 +1,27 @@
+{% import "snippets/paginationRenderSort.html.twig" as paginationRenderSort %}
+
+<table class="table table-striped table-bordered nowrap">
+    <thead class="thead-light">
+        <th scope="col">{% trans %}lp{% endtrans %}</th>
+        <th scope="col">{{ paginationRenderSort.renderSort(pagination, 'user.username'|trans, 'u.username') }}</th>
+        <th scope="col">{{ paginationRenderSort.renderSort(pagination, 'user.createDate'|trans, 'u.createdAt') }}</th>
+        <th scope="col">{{ paginationRenderSort.renderSort(pagination, 'user.lastLoginDate'|trans, 'u.lastLoginDate') }}</th>
+        <th scope="col">{% trans %}actions{% endtrans %}</th>
+    </thead>
+
+    <tbody>
+    {% for user in pagination %}
+        <tr>
+            <td scope="row">{{ ((pagination.getCurrentPageNumber - 1) * pagination.getItemNumberPerPage) + loop.index }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.createdAt|date('Y-m-d H:i:s') }}</td>
+            <td>{{ user.lastLoginDate ? user.lastLoginDate|date('Y-m-d H:i:s') : 'never'|trans }}</td>
+            <td>
+                <button class="btn btn-primary fas fa-edit btnAction btnUserEdit" data-action="{{ path('userEdit', {'userId' : user.id }) }}"></button>
+                <button class="btn btn-danger fas fa-trash btnAction btnUserDelete" data-action="{{ path('userDelete', {'userId' : user.id }) }}"></button>
+            </td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>

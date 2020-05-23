@@ -12,6 +12,14 @@
     </div>
 </div>
 
+{% if form.roles is defined  %}
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.roles) }}
+        </div>
+    </div>
+{% endif %}
+
 <div class="row">
     <div class="col">
         {{ form_row(form.save, {'attr': {'class': 'btn-block btn btn-primary saveBtn'}}) }}

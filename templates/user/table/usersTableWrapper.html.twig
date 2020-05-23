@@ -1,0 +1,17 @@
+{% if pagination is not empty %}
+
+    <div class="navigation">{{knp_pagination_render(pagination)}}</div>
+
+    <div id="UsersTable" class="table-responsive tableWrapper">
+        {% include 'user/table/usersTable.html.twig' %}
+    </div>
+
+    <div class="navigation">{{knp_pagination_render(pagination)}}</div>
+
+
+    {% include 'snippets/hiddenAlerts.html.twig' %}
+{% else %}
+    <div class="alert alert-warning">
+        <h2>{% trans %}noResult{% endtrans %}</h2>
+    </div>
+{% endif %}

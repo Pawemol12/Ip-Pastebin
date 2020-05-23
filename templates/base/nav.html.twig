@@ -20,6 +20,17 @@
                     {% endif %}
                 </div>
             </li>
+
+            {% if is_granted(constant('App\\Enum\\UserRolesEnum::USER_ROLE_ADMIN')) %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle {% if page is defined and page == constant('App\\Enum\\PagesEnum::ADMIN_PAGE')  %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% trans %}adminPage.title{% endtrans %}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ path('adminUsers') }}">{% trans %}usersPage.title{% endtrans %}</a>
+                    </div>
+                </li>
+            {% endif %}
         </ul>
 
         {% if app.user %}

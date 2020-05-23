@@ -145,6 +145,51 @@ function bindDeleteModal(modalSelector = '#FormModal', confirmBtnSelector = '#co
     });
 }
 
+function bindForm(formSelector, tableWrapperSelector = '#TableWrapper', modalSelector='', actionHandler=null) {
+    $('body').on('submit', formSelector, function (e) {
+        e.preventDefault();
+        $(this).ajaxSubmit(
+            {
+                success: function (resp) {
+                    if (typeof resp === 'object') {
+                        switch (resp.type) {
+                            case 'alert': {
+                                alertBS('#alertContainer', resp.message, resp.alert_type);
+                                if (modalSelector) {
+                                    $(modalSelector).modal('hide');
+                                    $(modalSelector).modal('dispose');
+                                    $(modalSelector).remove();
+                                }
+                                break;
+                            }
+                        }
+                    } else {
+                        $html = $(resp);
+                        if ($html[0].tagName == 'FORM') {
+                            $(formSelector).html(resp);
+                        }
+                        else {
+                            $(tableWrapperSelector).html(resp);
+                            copyAlerts('#hiddenAlerts', '#alertContainer', true);
+                            if (modalSelector) {
+                                $(modalSelector).modal('hide');
+                                $(modalSelector).modal('dispose');
+                                $(modalSelector).remove();
+                            }
+                        }
+                    }
+
+                    if (actionHandler) {
+                        actionHandler();
+                    }
+                },
+                error: function () {
+                    alertBS('#alertContainer', 'Wystąpił błąd podczas wyszukiwania', ALERT_ERROR);
+                },
+            });
+    });
+}
+
 function bindAjaxModalForm(btnSelector, modalFormSelector = "#FormModal", successHandler = null, hideHandler=null) {
     $('body').on('click', btnSelector, function (e) {
         e.preventDefault();
@@ -229,6 +274,11 @@ function bindIpInfoGetter()
     });*/
 }
 
+function initSelectPicker()
+{
+    $('.selectpicker').selectpicker();
+}
+
 
 $(document).ready(function () {
 
@@ -243,19 +293,36 @@ $(document).ready(function () {
         $(this).datetimepicker('hide');
     });
 
+    initSelectPicker();
+
     bindIpInfoGetter();
 
+    //Moje paste'y
     bindAjaxKnpPaginator('#MyPastesTableWrapper');
     bindSearchForm('#MyPastesSearchForm','#MyPastesTableWrapper');
 
     bindAjaxModalForm('.btnMyPasteDelete', "#MyPasteDeleteModal");
     bindDeleteModal("#MyPasteDeleteModal", "#confirmBtn", "#cancelBtn", "#MyPastesTableWrapper");
 
+    //Wszystkie paste'y
     bindAjaxKnpPaginator('#PastesTableWrapper');
     bindSearchForm('#PastesSearchForm','#PastesTableWrapper');
 
     bindAjaxModalForm('.btnPasteDelete', "#PasteDeleteModal");
     bindDeleteModal("#PasteDeleteModal", "#confirmBtn", "#cancelBtn", "#PastesTableWrapper");
+
+    //Admin - użytkownicy
+    bindAjaxKnpPaginator('#UsersTableWrapper');
+    bindSearchForm('#UsersSearchForm','#UsersTableWrapper');
+
+    bindAjaxModalForm('.btnUserDelete', "#UserDeleteModal");
+    bindDeleteModal("#UserDeleteModal", "#confirmBtn", "#cancelBtn", "#UsersTableWrapper");
+
+    bindAjaxModalForm('#addUserBtn', '#UserFormModal');
+    bindAjaxModalForm('.btnUserEdit', '#UserFormModal');
+
+    bindForm('#UserForm','#UsersTableWrapper', '#UserFormModal');
+
 });
 
 //$('.ipV4Address').tooltip();

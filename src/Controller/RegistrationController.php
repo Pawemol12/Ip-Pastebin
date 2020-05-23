@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Enum\PagesEnum;
 use App\Enum\UserTypeEnum;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -76,6 +77,7 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'form' => $form->createView(),
+            'page' => PagesEnum::REGISTER_PAGE
         ]);
     }
 

@@ -13,4 +13,9 @@ namespace App\Enum;
 abstract class UserRolesEnum {
     const USER_ROLE_ADMIN = 'ROLE_ADMIN';
     const USER_ROLE_USER = 'ROLE_USER';
+
+    public const CHOICES = [
+        'userRoles.role_user' => self::USER_ROLE_USER,
+        'userRoles.role_admin' => self::USER_ROLE_ADMIN,
+    ];
 }
