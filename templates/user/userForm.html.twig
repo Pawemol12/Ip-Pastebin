@@ -1,0 +1,21 @@
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="col">
+        {{ form_row(form.username) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        {{ form_row(form.password) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        {{ form_row(form.save, {'attr': {'class': 'btn-block btn btn-primary saveBtn'}}) }}
+    </div>
+</div>
+
+{{ form_end(form) }}

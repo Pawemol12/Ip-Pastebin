@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% set page = constant('App\\Enum\\PagesEnum::REGISTER_PAGE') %}
+
+{% set title='registration.title'|trans %}
+
+{% block body %}
+<div id="registrationPage">
+    <div class="card">
+        <div class="card-header">
+            <h2>{% trans %}registration.title{% endtrans %}</h2>
+        </div>
+        <div class="card-body">
+            {% include 'user/userForm.html.twig' %}
+        </div>
+    </div>
+</div>
+{% endblock %}

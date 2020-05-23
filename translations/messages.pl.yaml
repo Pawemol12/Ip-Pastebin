@@ -18,6 +18,17 @@ loginPage:
 mainPage:
   title: Ip Pastebin
 anonim: Anonim
+
+user:
+  username: Nazwa użytkownika
+  password: Hasło
+
+registration:
+  title: Rejestracja
+  createAccount: Stwórz konto
+  password: Hasło
+  repeatPassword: Powtórz hasło
+  registrationSuccessfull: Pomyślnie utworzono konto!
 pastebin:
   title: Pastebin
   pastePaste: Wklej paste

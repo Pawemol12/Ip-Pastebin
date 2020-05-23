@@ -8,3 +8,15 @@ App\Entity\Paste:
       - NotBlank: ~
     expireDate:
       - GreaterThan: +1 hours
+
+App\Entity\User:
+  constraints:
+    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: username
+  properties:
+    username:
+      - NotBlank: ~
+      - Length:
+          min: 8
+          max: 15
+    password:
+      - NotBlank: ~
