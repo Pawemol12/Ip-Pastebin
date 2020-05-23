@@ -22,6 +22,7 @@ pastebin:
   title: Pastebin
   pastePaste: Wklej paste
   myPasteList: Lista moich paste'ów
+  pasteList: Lista paste'ów
   addNewPasteTitle: Dodawanie nowego paste'a
   editPasteTitle: Edycja paste'a - {{ code }}
   paste:
@@ -34,6 +35,7 @@ pastebin:
     notExpire: Nie wygasa
     deleteTitle: Usuwanie paste'a - {{ code }}
     deleteQuestion: Czy na pewno chcesz usunąć tego paste'a?
+    username: Użytkownik
 
   addPasteSuccess: Pomyślnie dodano nowego paste'a.
   editPasteSuccess: Pomyślnie edytowano paste'a.

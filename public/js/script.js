@@ -250,6 +250,12 @@ $(document).ready(function () {
 
     bindAjaxModalForm('.btnMyPasteDelete', "#MyPasteDeleteModal");
     bindDeleteModal("#MyPasteDeleteModal", "#confirmBtn", "#cancelBtn", "#MyPastesTableWrapper");
+
+    bindAjaxKnpPaginator('#PastesTableWrapper');
+    bindSearchForm('#PastesSearchForm','#PastesTableWrapper');
+
+    bindAjaxModalForm('.btnPasteDelete', "#PasteDeleteModal");
+    bindDeleteModal("#PasteDeleteModal", "#confirmBtn", "#cancelBtn", "#PastesTableWrapper");
 });
 
 //$('.ipV4Address').tooltip();

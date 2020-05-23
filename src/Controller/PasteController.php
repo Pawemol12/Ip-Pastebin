@@ -6,6 +6,7 @@ use App\Entity\Paste;
 use App\Enum\AlertsEnum;
 use App\Enum\UserRolesEnum;
 use App\Form\MyPastesSearchForm;
+use App\Form\PastesSearchForm;
 use App\Form\PasteType;
 use App\Repository\PasteRepository;
 use App\Service\IpFinder;
@@ -247,6 +248,45 @@ class PasteController extends AbstractController
     }
 
     /**
+     * @Route("/paste/delete/{pasteCode}", name="pasteDelete")
+     */
+    public function pasteDelete(string $pasteCode, Request $request, PasteRepository $pasteRepository, TranslatorInterface $translator, PaginatorInterface $paginator, SessionInterface $session, Security $security)
+    {
+        $paste = $pasteRepository->findOneByCode($pasteCode);
+        if (!$paste) {
+            return $this->json([
+                'type' => 'alert',
+                'alert_type' => AlertsEnum::ALERT_TYPE_ERROR,
+                'message' => $translator->trans('pastebin.pasteNotExist')
+            ]);
+        }
+
+        if ($request->query->getInt('delete') == 1) {
+
+            $pasteRepository->delete($paste);
+
+            $pastesListPagination = $this->createPastesListPagination($session, $paginator, $pasteRepository);
+
+            return $this->render('paste/table/pastesTableWrapper.html.twig', [
+                'pagination' => $pastesListPagination,
+                'alerts' => [
+                    [
+                        'type' =>  AlertsEnum::ALERT_TYPE_SUCCESS,
+                        'message' => $translator->trans('pastebin.deletePasteSuccess')
+                    ]
+                ]
+            ]);
+        }
+
+        return $this->render('snippets/yesNoModal.html.twig', [
+            'ModalId' => 'PasteDeleteModal',
+            'title' => $translator->trans('pastebin.paste.deleteTitle', ['{{ code }}' => $paste->getCode()]),
+            'text' => $translator->trans('pastebin.paste.deleteQuestion'),
+            'actionUrl' => $this->generateUrl('pasteDelete', ['pasteCode' => $paste->getCode(), 'delete' => 1])
+        ]);
+    }
+
+    /**
      * @Route("/getIpInfo/{ipAddress}", name="getIpInfo")
      */
     public function getIpInfo(string $ipAddress, TextProcessor $textProcessor)
@@ -304,6 +344,53 @@ class PasteController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/paste/list", name="pasteList")
+     */
+    public function pasteList(Request $request, PasteRepository $pasteRepository, Security $security, PaginatorInterface $paginator, SessionInterface $session)
+    {
+        $pastesSearchForm = $this->createPastesSearchForm();
+
+        $page = $request->query->getInt('page', 1);
+        $session->set('pastebin/pastes/pastesListLastPage', $page);
+
+        $pastesListPagination = $this->createPastesListPagination($session, $paginator, $pasteRepository);
+
+        return $this->render('paste/pasteList.html.twig', [
+            'searchForm' => $pastesSearchForm->createView(),
+            'pagination' => $pastesListPagination
+        ]);
+    }
+
+    /**
+     * @Route("/paste/list/search", name="pasteListSearch")
+     */
+    public function pasteListSearch(Request $request, PasteRepository $pasteRepository, Security $security, PaginatorInterface $paginator, SessionInterface $session)
+    {
+        $pastesSearchForm = $this->createPastesSearchForm();
+        $pastesSearchForm->handleRequest($request);
+
+        if ($pastesSearchForm->isSubmitted() && $pastesSearchForm->isValid()) {
+            $session->set('pastebin/pastes/pastesListSearchFormData', $pastesSearchForm->getData());
+        }
+
+        $page = $request->query->getInt('page', 1);
+        $session->set('pastebin/pastes/pastesListLastPage', $page);
+
+        $pastesListPagination = $this->createPastesListPagination($session, $paginator, $pasteRepository);
+
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('paste/table/pastesTableWrapper.html.twig', [
+                'pagination' => $pastesListPagination
+            ]);
+        }
+
+        return $this->render('paste/pasteList.html.twig', [
+            'searchForm' => $pastesSearchForm->createView(),
+            'pagination' => $pastesListPagination
+        ]);
+    }
+
     private function createPasteForm(Paste $paste = null, string $actionUrl = '')
     {
         if (empty($actionUrl))
@@ -323,6 +410,13 @@ class PasteController extends AbstractController
         ]);
     }
 
+    private function createPastesSearchForm()
+    {
+        return $this->createForm(PastesSearchForm::class, [], [
+            'action' => $this->generateUrl('pasteListSearch')
+        ]);
+    }
+
     /**
      * @param int $userId
      * @param SessionInterface $session
@@ -338,6 +432,24 @@ class PasteController extends AbstractController
 
         $pagination = $paginator->paginate($pastesQb, $page, $this->getParameter('pastes_per_page'));
         $pagination->setUsedRoute('myPasteListSearch');
+
+        return $pagination;
+    }
+
+    /**
+     * @param SessionInterface $session
+     * @param PaginatorInterface $paginator
+     * @param PasteRepository $pasteRepository
+     * @return PaginationInterface
+     */
+    private function createPastesListPagination(SessionInterface $session, PaginatorInterface $paginator, PasteRepository $pasteRepository)
+    {
+        $searchFormData = $session->get('pastebin/pastes/pastesListSearchFormData', []);
+        $page = $session->get('pastebin/pastes/pastesListLastPage', 1);
+        $pastesQb = $pasteRepository->getPastesByFormData($searchFormData);
+
+        $pagination = $paginator->paginate($pastesQb, $page, $this->getParameter('pastes_per_page'));
+        $pagination->setUsedRoute('pasteListSearch');
 
         return $pagination;
     }

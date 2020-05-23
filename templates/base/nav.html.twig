@@ -15,6 +15,9 @@
                     {% if app.user %}
                     <a class="dropdown-item" href="{{ path('myPasteList') }}">{% trans %}pastebin.myPasteList{% endtrans %}</a>
                     {% endif %}
+                    {% if is_granted(constant('App\\Enum\\UserRolesEnum::USER_ROLE_ADMIN')) %}
+                        <a class="dropdown-item" href="{{ path('pasteList') }}">{% trans %}pastebin.pasteList{% endtrans %}</a>
+                    {% endif %}
                 </div>
             </li>
         </ul>

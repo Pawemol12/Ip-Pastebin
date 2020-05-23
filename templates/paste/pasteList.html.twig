@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% set title='pastebin.pasteList'|trans %}
+{% set page=constant('App\\Enum\\PagesEnum::PASTEBIN_PAGE') %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h2>{{ title }}</h2>
+            <hr/>
+            <div id="PastesSearchFormWrapper">
+                {% include 'paste/form/pastesSearchForm.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {% include 'snippets/alertContainer.html.twig' %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div id="PastesTableWrapper">
+                {% include 'paste/table/pastesTableWrapper.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+    <div id="ModalContainer"></div>
+{% endblock %}

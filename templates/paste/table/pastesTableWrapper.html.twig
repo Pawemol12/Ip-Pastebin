@@ -1,0 +1,17 @@
+{% if pagination is not empty %}
+
+    <div class="navigation">{{knp_pagination_render(pagination)}}</div>
+
+    <div id="PastesTable" class="table-responsive tableWrapper">
+        {% include 'paste/table/pastesTable.html.twig' %}
+    </div>
+
+    <div class="navigation">{{knp_pagination_render(pagination)}}</div>
+
+
+    {% include 'snippets/hiddenAlerts.html.twig' %}
+{% else %}
+    <div class="alert alert-warning">
+        <h2>{% trans %}noResult{% endtrans %}</h2>
+    </div>
+{% endif %}
