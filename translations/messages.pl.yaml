@@ -23,6 +23,24 @@ mainPage:
   title: Ip Pastebin
 anonim: Anonim
 
+error:
+  pageTitle: Błąd
+  errorNo: Numer błędu
+  404.title: Szukana przez Ciebie strona nie istnieje.
+  404.desc: Upewnij się, że podany adres jest prawidłowy lub skontaktuj się z administratorem strony w celu rozwiązania problemu.
+  403.title: Brak dostępu do podanej strony.
+  403.desc: Nie masz dostępu do tej strony. W przypadku niejasności skontaktuj się z administratorem.
+  default.title: Wystąpił nieoczekiwany błąd.
+  default.desc: Coś poszło nie tak. Jeśli błąd będzie się powtarzał skontaktuj się z administratorem strony w celu jego rozwiązania.
+  requiredLogin:
+    title: Wymagane logowanie
+    desc: Przejście do tej zakładki wymaga zalogowania
+  permissions:
+    noPermission: Nie posiadasz odpowiednich uprawnień
+
+returnToDefaultPage: Powrót do strony głównej
+logoutSuccess: Pomyślnie wylogowano.
+
 usersPage:
   title: Użytkownicy
   addUser: Dodaj użytkownika

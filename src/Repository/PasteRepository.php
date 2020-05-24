@@ -121,4 +121,17 @@ class PasteRepository extends CoreRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getExpiredPastes()
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('p');
+        $qb->from(Paste::class, 'p');
+
+        $qb->where($qb->expr()->lte('p.expireDate', ':expireDateNow'));
+        $dateTimeNow = new \DateTime();
+        $qb->setParameter('expireDateNow', $dateTimeNow->format('Y-m-d H:i:s'));
+
+        return $qb->getQuery()->getResult();
+    }
 }
