@@ -41,10 +41,7 @@ class TextProcessor
 
         foreach ($ipAddresses as $ipAddress)
         {
-            #$tooltipTitle = $this->getIpInfo($ipAddress);
-            #'.$tooltipTitle.'
             $ipAddressFormat = '<span title="" rel="tooltip" class="ipV4Address" data-html="true">'.$ipAddress.'</span>';
-
             $text = str_replace($ipAddress, $ipAddressFormat,  $text);
         }
 
@@ -57,10 +54,7 @@ class TextProcessor
 
         foreach ($ipAddresses as $ipAddress)
         {
-            $tooltipTitle = $this->getIpInfo($ipAddress);
-
-
-            $ipAddressFormat = '<span class="ipV6Address" title="'.$tooltipTitle.'" rel="tooltip" class="ipV6Address" data-html="true">'.$ipAddress.'</span>';
+            $ipAddressFormat = '<span class="ipV6Address" title="" rel="tooltip" class="ipV6Address" data-html="true">'.$ipAddress.'</span>';
             $text = str_replace($ipAddress, $ipAddressFormat,  $text);
         }
 
