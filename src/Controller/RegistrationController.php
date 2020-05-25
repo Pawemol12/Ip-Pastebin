@@ -40,7 +40,8 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user, [
             'action' => $this->generateUrl('user_register'),
-            'type' => UserTypeEnum::REGISTER
+            'type' => UserTypeEnum::REGISTER,
+            'attr' => ['id' => 'RegisterForm']
         ]);
         $form->handleRequest($request);
 
